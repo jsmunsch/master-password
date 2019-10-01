@@ -1,8 +1,9 @@
 const fs = require("fs");
 
+const fileName = "secrets.json";
 function readSecrets() {
   try {
-    const secretsJSON = fs.readFileSync("secrets.json", "utf-8");
+    const secretsJSON = fs.readFileSync(fileName, "utf-8");
     const secrets = JSON.parse(secretsJSON);
     return secrets;
   } catch (error) {
