@@ -25,19 +25,23 @@ function get(password, key) {
   let decryptedSecret = cryptoKey.update(secret, "hex", "utf8");
   decryptedSecret += cryptoKey.final("utf8");
 
-  console.log(decryptedSecret);
+  return decryptedSecret;
 }
 
-exports.executeCommand = function executeCommand(action, key, value) {
+exports.executeCommand = function executeCommand(password, action, key, value) {
   switch (action) {
     case "get":
-      get(key);
-      break;
+      get(password, key);
+      return get(password, key);
     case "set":
-      set(key, value);
-      break;
+      set(password, key, value);
+      return set(password, key, value);
     case "unset":
-      unset(key);
-      break;
+      unset(password, key);
+      return set(password, key);
   }
 };
+
+exports.set = set;
+exports.unset = unset;
+exports.get = get;
